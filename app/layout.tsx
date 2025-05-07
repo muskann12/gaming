@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
+import Navbar from "./components/navbar";
+import Footer from "./components/footer";
+import { GameStoreProvider } from "./contexts/GameStoreContext"; // Import the provider
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -25,10 +28,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        {children}
+      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+        <GameStoreProvider> {/* Wrap your entire app with the provider */}
+          <Navbar />
+          {children}
+          <Footer />
+        </GameStoreProvider>
       </body>
     </html>
   );
